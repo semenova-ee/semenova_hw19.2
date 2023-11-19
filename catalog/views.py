@@ -1,7 +1,10 @@
 from django.http import HttpResponse
+from django.shortcuts import render
+
 
 def index(request):
-    return HttpResponse('Katya')
+    return render(request, "catalog/index.html")
 
 def about(request):
-    return HttpResponse('<h1>about</h1>')
+    return render(request, "catalog/about.html")
+
