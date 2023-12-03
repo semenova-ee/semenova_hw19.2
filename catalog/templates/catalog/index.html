@@ -1,4 +1,5 @@
 {% extends 'catalog/base.html' %}
+{% load media_tags %}
 
 {% block title %}Skystore - Каталог{% endblock %}
 
@@ -14,10 +15,11 @@
             <div class="col-md-3 col-10 mt-5">
                 <div class="card mx-auto">
                     {% if product.image %}
-                        <img class='mx-auto img-thumbnail' src="{{ product.image.url }}" alt="{{ product.name }}" width="auto" height="auto"/>
+                        <!-- Use the custom template filter -->
+                        <img class='mx-auto img-thumbnail' src="{{ product.image.url|mediapath }}" alt="{{ product.name }}" width="auto" height="auto"/>
                     {% else %}
                         <!-- Construct the placeholder image URL based on the media root and a default image -->
-                        <img class='mx-auto img-thumbnail' src="media/imgs/no_image.png" alt="{{ product.name }}" width="auto" height="auto"/>
+                        <img class='mx-auto img-thumbnail' src="{{ 'no_image.png'|mediapath }}" alt="{{ product.name }}" width="auto" height="auto"/>
                     {% endif %}
                     <div class="card-body text-center mx-auto">
                         <div class='cvp'>
