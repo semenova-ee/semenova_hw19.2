@@ -4,7 +4,7 @@ from catalog.models import Category, Product
 class Command(BaseCommand):
     help = 'Populates the database with sample data'
 
-    def handle(self, args, *kwargs):
+    def handle(self, *args, **kwargs):
         # Clear old data
         Category.objects.all().delete()
         Product.objects.all().delete()
