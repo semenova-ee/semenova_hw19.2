@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+{% block title %}Confirm Deletion{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h2>Confirm Deletion</h2>
+    <p>Are you sure you want to delete "{{ post.title }}"?</p>
+    <form method="post" action="{% url 'blog:post_delete' slug=post.slug %}">
+      {% csrf_token %}
+      <input type="submit" class="btn btn-danger" value="Delete">
+      <a href="{% url 'blog:post_detail' slug=post.slug %}" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+{% endblock %}
