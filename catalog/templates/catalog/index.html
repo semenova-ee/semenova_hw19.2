@@ -26,10 +26,15 @@
                             <h5 class="card-title font-weight-bold">{{ product.name }}</h5>
                             <h6 class="card-text">{{ product.description|slice:":100" }}</h6>
                             <p class="card-text">${{ product.price }}</p>
+                            {% if product.active_version %}
+                                <p class="card-text">Active Version: {{ product.active_version.version_name }}</p>
+                            {% endif %}
                             <a href="{% url 'catalog:product_detail' product.id %}" class="btn btn-outline-dark px-auto my-2">View Details</a><br />
                             <a href="#" class="btn btn-outline-primary px-auto my-2">Add to Cart</a>
                             <a href="{% url 'catalog:product_update' product.id %}" class="btn btn-outline-primary">Update</a>
                             <a href="{% url 'catalog:product_delete' product.id %}" class="btn btn-outline-danger">Delete</a>
+                            <a href="{% url 'catalog:version_create' product.id %}" class="btn btn-outline-success">Add Version</a>
+
                         </div>
                     </div>
                 </div>
