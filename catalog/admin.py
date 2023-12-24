@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db.models import Q
 
-from .models import Category, Product
+from .models import Category, Product, Version
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ["id", "name", "price", "category"]
@@ -26,3 +26,4 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Version)
