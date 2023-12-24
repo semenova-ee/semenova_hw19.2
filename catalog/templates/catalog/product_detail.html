@@ -21,6 +21,8 @@
                             <h6 class="card-text">{{ product.description|slice:":100" }}</h6>
                             <p class="card-text">${{ product.price }}</p>
                             <a href="#" class="btn btn-outline-primary px-auto my-2">Add to Cart</a>
+                            <a href="{% url 'catalog:product_update' product.id %}" class="btn btn-outline-primary">Update</a>
+                            <a href="{% url 'catalog:product_delete' product.id %}" class="btn btn-outline-danger">Delete</a>
                         </div>
                     </div>
                 </div>
