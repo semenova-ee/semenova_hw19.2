@@ -24,16 +24,21 @@
                     <div class="card-body text-center mx-auto">
                         <div class='cvp'>
                             <h5 class="card-title font-weight-bold">{{ product.name }}</h5>
+                            <h5 class="card-title font-weight-bold">Owner: {{ product.user.username }}</h5>
                             <h6 class="card-text">{{ product.description|slice:":100" }}</h6>
                             <p class="card-text">${{ product.price }}</p>
                             {% if product.active_version %}
-                                <p class="card-text">Active Version: {{ product.active_version.version_name }}</p>
+                                <p class="card-text">Актвиная версия: {{ product.active_version.version_name }}</p>
                             {% endif %}
-                            <a href="{% url 'catalog:product_detail' product.id %}" class="btn btn-outline-dark px-auto my-2">View Details</a><br />
-                            <a href="#" class="btn btn-outline-primary px-auto my-2">Add to Cart</a>
-                            <a href="{% url 'catalog:product_update' product.id %}" class="btn btn-outline-primary">Update</a>
-                            <a href="{% url 'catalog:product_delete' product.id %}" class="btn btn-outline-danger">Delete</a>
-                            <a href="{% url 'catalog:version_create' product.id %}" class="btn btn-outline-success">Add Version</a>
+                            <a href="{% url 'catalog:product_detail' product.id %}" class="btn btn-outline-dark px-auto my-2">Посмотреть детали</a><br />
+                            <a href="#" class="btn btn-outline-primary px-auto my-2">Добавить в корзину</a>
+
+                            {% if product.user.email == user.email %}
+                            <!-- The user is the owner of the product -->
+                            <a href="{% url 'catalog:product_update' product.id %}" class="btn btn-outline-primary">Изменить</a>
+                            <a href="{% url 'catalog:product_delete' product.id %}" class="btn btn-outline-danger">Удалить</a>
+                            <a href="{% url 'catalog:version_create' product.id %}" class="btn btn-outline-success">Добавить версию</a>
+                            {% endif %}
 
                         </div>
                     </div>
@@ -41,8 +46,11 @@
             </div>
         {% endfor %}
     </div>
-    <div class="col-md-3 col-10 mt-5">
-        <a href="{% url 'catalog:product_create' %}" class="btn btn-success">Add new Product</a>
-    </div>
+    {% if user.is_authenticated %}
+        <div class="col-md-3 col-10 mt-5">
+            <a href="{% url 'catalog:product_create' %}" class="btn btn-success">Добавить новый продукт</a>
+        </div>
+    {% endif %}
+
 </div>
 {% endblock %}

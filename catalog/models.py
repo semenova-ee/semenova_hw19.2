@@ -1,4 +1,5 @@
 from django.db import models
+from members.models import CustomUser
 
 
 class Category(models.Model):
@@ -12,6 +13,7 @@ class Product(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to="imgs", blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser,on_delete=models.CASCADE, default=1)
     price = models.IntegerField(blank=True)
     created_at = models.DateField(auto_now_add=True, blank=True)
     updated_at = models.DateField(auto_now=True, blank=True)

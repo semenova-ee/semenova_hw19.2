@@ -33,6 +33,12 @@ class ProductCreateView(CreateView):
     form_class = ProductForm
     success_url = reverse_lazy('catalog:index')
 
+    def form_valid(self, form):
+        # Set the owner (user) before saving the form
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
 
 class ProductUpdateView(UpdateView):
     model = Product
