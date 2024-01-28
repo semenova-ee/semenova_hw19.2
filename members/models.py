@@ -9,4 +9,16 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
+    ROLE_CHOICES = [
+        ('user', 'User'),
+        ('moderator', 'Moderator'),
+    ]
+
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='user')
+
+
+    def has_moderator_permissions(self):
+        return self.role == 'moderator'
+
+
 

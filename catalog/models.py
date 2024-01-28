@@ -17,6 +17,7 @@ class Product(models.Model):
     price = models.IntegerField(blank=True)
     created_at = models.DateField(auto_now_add=True, blank=True)
     updated_at = models.DateField(auto_now=True, blank=True)
+    is_published = models.BooleanField(default=False)
 
     def get_active_version(self):
         return self.versions.filter(is_active=True).first()

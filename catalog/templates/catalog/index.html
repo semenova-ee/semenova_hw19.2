@@ -33,7 +33,7 @@
                             <a href="{% url 'catalog:product_detail' product.id %}" class="btn btn-outline-dark px-auto my-2">Посмотреть детали</a><br />
                             <a href="#" class="btn btn-outline-primary px-auto my-2">Добавить в корзину</a>
 
-                            {% if product.user.email == user.email %}
+                            {% if product.user.email == user.email or user.role == 'moderator' %}
                             <!-- The user is the owner of the product -->
                             <a href="{% url 'catalog:product_update' product.id %}" class="btn btn-outline-primary">Изменить</a>
                             <a href="{% url 'catalog:product_delete' product.id %}" class="btn btn-outline-danger">Удалить</a>
