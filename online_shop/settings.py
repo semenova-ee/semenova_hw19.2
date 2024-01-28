@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'online_shop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hw20.1',
+        'NAME': 'skystore',
         'USER': 'postgres',
         'PASSWORD': 'Katerina321',
         'HOST': '127.0.0.1',
@@ -138,3 +138,14 @@ AUTHENTICATION_BACKENDS = [
     'members.backends.EmailBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+# Emailing settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_FROM = 'semenovydaka@gmail.com'
+EMAIL_HOST_USER = 'semenovydaka@gmail.com'
+EMAIL_HOST_PASSWORD = 'ewkaerdnlwmduwuy'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+PASSWORD_RESET_TIMEOUT = 14400
