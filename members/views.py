@@ -89,7 +89,7 @@ def verify_email(request, uidb64, token):
 
 class ProfileUser(DetailView):
     model = CustomUser
-    template_name = 'members/profile_user.html'
+    template_name = 'members/users/profile_user.html'
     context_object_name = "custom_user"
 
 

@@ -1,3 +1,4 @@
+from django.http import HttpResponseForbidden
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
@@ -46,6 +47,21 @@ class ProductUpdateView(UpdateView):
     form_class = ProductForm
     pk_url_kwarg = 'pk'
     success_url = reverse_lazy('catalog:index')
+    # permission_required = ['members.can_cancel_product', 'members.can_change_product_description', 'members.can_change_product_category']
+    def dispatch(self, request, *args, **kwargs):
+        # Get the product instance
+        self.object = self.get_object()
+
+        # Check if the user is the owner of the product or has specific permissions
+        if (self.request.user == self.object.user or
+                self.request.user.has_perm('members.can_cancel_product') or
+                self.request.user.has_perm('members.can_change_product_description') or
+                self.request.user.has_perm('members.can_change_product_category')):
+
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            # Return a forbidden response if the user doesn't have permission
+            return HttpResponseForbidden("You don't have permission to access this page.")
 
 
 class ProductDeleteView(DeleteView):

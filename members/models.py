@@ -20,5 +20,9 @@ class CustomUser(AbstractUser):
     def has_moderator_permissions(self):
         return self.role == 'moderator'
 
-
-
+    class Meta:
+        permissions = [
+            ("can_cancel_product", "Can cancel product"),
+            ("can_change_product_description", "Can change product description"),
+            ("can_change_product_category", "Can change product category"),
+        ]
