@@ -1,7 +1,9 @@
 from django.http import HttpResponseForbidden
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views import View
+from django.views.decorators.cache import cache_page
 from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, DeleteView
 from .forms import ProductForm, VersionForm
 from .models import Product
@@ -27,6 +29,10 @@ class ProductDetailView(DetailView):
     model = Product
     template_name = 'catalog/product_detail.html'
     context_object_name = 'product'
+
+    @method_decorator(cache_page(60 * 15))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 class ProductCreateView(CreateView):
     model = Product
