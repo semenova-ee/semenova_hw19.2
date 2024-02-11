@@ -14,3 +14,4 @@ def get_categories():
         cache.set('categories', categories, timeout=60 * 15)
 
     return categories
+
